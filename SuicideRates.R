@@ -23,3 +23,19 @@ unique(suicide_data$Sex)
 
 # Unique values in Year column
 unique(suicide_data$Year)
+
+# Filter out rows with missing values in SuicideCount or Population
+cleaned_data <- suicide_data %>%
+  filter(!is.na(SuicideCount) & !is.na(Population))
+
+# Create a line chart of suicide rates over time
+suicide_rates_over_time <- cleaned_data %>%
+  group_by(Year) %>%
+  summarise(total_suicide_rate = sum(SuicideCount) / sum(Population) * 100000)  # Calculate suicide rate per 100,000 population
+
+# Plot
+ggplot(suicide_rates_over_time, aes(x = Year, y = total_suicide_rate)) +
+  geom_line(color = "skyblue", size = 1) +
+  geom_point(color = "blue", size = 2) +
+  labs(title = "Suicide Rates Over Time", x = "Year", y = "Suicide Rate per 100,000 Population") +
+  theme_minimal()
