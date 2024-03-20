@@ -53,3 +53,20 @@ ggplot(cleaned_data, aes(x = Sex, y = total_suicide_rate, fill = Sex)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Suicide Rates by Gender", x = "Gender", y = "Suicide Rate per 100,000 Population") +
   theme_minimal()
+
+
+
+## Specialized Analysis 1: Analysis of Suicide Rates by Region Over Time
+
+# Calculate suicide rates per 100,000 population by region and year
+suicide_rates_by_region <- suicide_data %>%
+  group_by(Year, RegionName) %>%
+  summarise(total_suicide_rate = sum(SuicideCount) / sum(Population) * 100000)
+
+# Plot
+ggplot(suicide_rates_by_region, aes(x = Year, y = total_suicide_rate, color = RegionName)) +
+  geom_line() +
+  labs(title = "Suicide Rates by Region Over Time",
+       x = "Year", y = "Suicide Rate per 100,000 Population",
+       color = "Region") +
+  theme_minimal()
