@@ -24,11 +24,11 @@ unique(suicide_data$Sex)
 # Unique values in Year column
 unique(suicide_data$Year)
 
+
+
 # Filter out rows with missing values in SuicideCount or Population
 cleaned_data <- suicide_data %>%
   filter(!is.na(SuicideCount) & !is.na(Population))
-
-
 
 # Create a line chart of suicide rates over time
 suicide_rates_over_time <- cleaned_data %>%
