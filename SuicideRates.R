@@ -39,3 +39,5 @@ ggplot(suicide_rates_over_time, aes(x = Year, y = total_suicide_rate)) +
   geom_point(color = "blue", size = 2) +
   labs(title = "Suicide Rates Over Time", x = "Year", y = "Suicide Rate per 100,000 Population") +
   theme_minimal()
+
+unique(suicide_data$CountryName)
