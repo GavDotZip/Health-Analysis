@@ -28,6 +28,8 @@ unique(suicide_data$Year)
 cleaned_data <- suicide_data %>%
   filter(!is.na(SuicideCount) & !is.na(Population))
 
+
+
 # Create a line chart of suicide rates over time
 suicide_rates_over_time <- cleaned_data %>%
   group_by(Year) %>%
@@ -40,4 +42,14 @@ ggplot(suicide_rates_over_time, aes(x = Year, y = total_suicide_rate)) +
   labs(title = "Suicide Rates Over Time", x = "Year", y = "Suicide Rate per 100,000 Population") +
   theme_minimal()
 
-unique(suicide_data$CountryName)
+
+
+# Filter out rows with non-finite values in total_suicide_rate
+cleaned_data <- suicide_rates_by_gender %>%
+  filter(!is.na(total_suicide_rate) & is.finite(total_suicide_rate))
+
+# Plot
+ggplot(cleaned_data, aes(x = Sex, y = total_suicide_rate, fill = Sex)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Suicide Rates by Gender", x = "Gender", y = "Suicide Rate per 100,000 Population") +
+  theme_minimal()
