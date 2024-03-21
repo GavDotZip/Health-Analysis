@@ -69,3 +69,20 @@ ggplot(cleaned_data, aes(x = Year, y = total_suicide_rate, color = RegionName)) 
        x = "Year", y = "Suicide Rate per 100,000 Population",
        color = "Region") +
   theme_minimal()
+
+
+
+## Specialized Analysis 2: Comparison of Suicide Rates between Urban and Rural Areas
+
+# Calculate suicide rates per 100,000 population by area type and year
+suicide_rates_by_area <- suicide_data %>%
+  group_by(Year, AreaType) %>%
+  summarise(total_suicide_rate = sum(SuicideCount) / sum(Population) * 100000)
+
+# Plot
+ggplot(suicide_rates_by_area, aes(x = Year, y = total_suicide_rate, fill = AreaType)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Comparison of Suicide Rates between Urban and Rural Areas",
+       x = "Year", y = "Suicide Rate per 100,000 Population",
+       fill = "Area Type") +
+  theme_minimal()
