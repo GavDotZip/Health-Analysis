@@ -72,19 +72,15 @@ ggplot(cleaned_data, aes(x = Year, y = total_suicide_rate, color = RegionName)) 
 
 
 
-## Specialized Analysis 2: Comparison of Suicide Rates between Urban and Rural Areas
-library(ggplot2)
-library(dplyr)
+## Specialized Analysis 2: Correlation Analysis between Suicide Rates and Economic Indicators
+library(corrplot)
 
-# Calculate suicide rates per 100,000 population by area type and year
-suicide_rates_by_area <- suicide_data %>%
-  group_by(Year, AreaType) %>%
-  summarise(total_suicide_rate = sum(SuicideCount) / sum(Population) * 100000)
+# Select relevant columns for correlation analysis
+economic_data <- select(suicide_data, Year, SuicideCount, Population, GDP, GDPPerCapita, GNI, GNIPerCapita)
 
-# Plot
-ggplot(suicide_rates_by_area, aes(x = Year, y = total_suicide_rate, fill = AreaType)) +
-  geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Comparison of Suicide Rates between Urban and Rural Areas",
-       x = "Year", y = "Suicide Rate per 100,000 Population",
-       fill = "Area Type") +
-  theme_minimal()
+# Calculate correlation matrix
+correlation_matrix <- cor(economic_data, use = "complete.obs")
+
+# Plot correlation matrix
+corrplot(correlation_matrix, method = "color", type = "upper", order = "hclust",
+         addrect = 4, tl.cex = 0.7, title = "Correlation Matrix: Suicide Rates and Economic Indicators")
