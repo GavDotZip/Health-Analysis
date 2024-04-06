@@ -7,3 +7,4 @@ df = pd.read_csv(file_path)
 # Summary statistics
 print("Summary statistics:")
 print(df.describe())
+
