@@ -1,0 +1,5 @@
+import pandas as pd
+
+# Load the dataset
+file_path = r'C:\Users\gavin\RProjects\Health-Analysis\heartAttackAnalysis\heart_attack.csv'
+df = pd.read_csv(file_path)
