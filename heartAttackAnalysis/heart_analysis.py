@@ -8,3 +8,6 @@ df = pd.read_csv(file_path)
 print("Summary statistics:")
 print(df.describe())
 
+# Check for missing values
+print("\nMissing values:")
+print(df.isnull().sum())
