@@ -29,7 +29,17 @@ print(df['Heart Attack Risk'].value_counts())
 df_filtered = df[['Age', 'Sex', 'Heart Attack Risk']]
 
 # Convert Sex to numerical values (0 for Female, 1 for Male)
-df_filtered['Sex'] = df_filtered['Sex'].map({'Female': 0, 'Male': 1})
+df_filtered.loc[:, 'Sex'] = df_filtered['Sex'].map({'Female': 0, 'Male': 1})
 
 # Group by Age and Sex and calculate the mean Heart Attack Risk
 grouped_df = df_filtered.groupby(['Age', 'Sex']).mean().reset_index()
+
+# Plotting line chart
+plt.figure(figsize=(10, 6))
+sns.lineplot(data=grouped_df, x='Age', y='Heart Attack Risk', hue='Sex', marker='o')
+plt.title('Correlation between Age, Sex, and Heart Attack Risk')
+plt.xlabel('Age')
+plt.ylabel('Heart Attack Risk')
+plt.legend(title='Sex', loc='best')
+plt.grid(True)
+plt.show()
