@@ -43,3 +43,7 @@ plt.ylabel('Heart Attack Risk')
 plt.legend(title='Sex', loc='best')
 plt.grid(True)
 plt.show()
+
+# Save the plot as an image in the same folder
+output_file_path = os.path.join(os.path.dirname(file_path), 'age_sex_heart_attack_risk.png')
+plt.savefig(output_file_path)
