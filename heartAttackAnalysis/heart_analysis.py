@@ -1,4 +1,6 @@
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 # Load the dataset
 file_path = r'C:\Users\gavin\RProjects\Health-Analysis\heartAttackAnalysis\heart_attack.csv'
@@ -21,3 +23,4 @@ for column in categorical_columns:
 # Distribution of target variable (Heart Attack Risk)
 print("\nDistribution of Heart Attack Risk:")
 print(df['Heart Attack Risk'].value_counts())
+
