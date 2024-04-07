@@ -24,3 +24,12 @@ for column in categorical_columns:
 print("\nDistribution of Heart Attack Risk:")
 print(df['Heart Attack Risk'].value_counts())
 
+# Correlation between Age and Sex with Heart Attack Risk
+# Filter out necessary columns
+df_filtered = df[['Age', 'Sex', 'Heart Attack Risk']]
+
+# Convert Sex to numerical values (0 for Female, 1 for Male)
+df_filtered['Sex'] = df_filtered['Sex'].map({'Female': 0, 'Male': 1})
+
+# Group by Age and Sex and calculate the mean Heart Attack Risk
+grouped_df = df_filtered.groupby(['Age', 'Sex']).mean().reset_index()
